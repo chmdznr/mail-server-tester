@@ -2,20 +2,25 @@
 import datetime
 import smtplib
 from email.mime.text import MIMEText
+from dotenv import load_dotenv
+import os
 
 #%% SMTP server configuration
 
+# Load environment variables
+load_dotenv()
 
-smtp_server = 'smtp.multidomain.mail.go.id'  # Replace with your SMTP server
-smtp_port = 587                   # Replace with your SMTP port (commonly 587 for TLS)
-username = 'notifikasi@arsip.go.id'  # Replace with your email
-password = '3.4z4maBUh'           # Replace with your email password
+# SMTP server configuration
+smtp_server = os.getenv('SMTP_SERVER')
+smtp_port = int(os.getenv('SMTP_PORT'))
+username = os.getenv('USERNAME')
+password = os.getenv('PASSWORD')
 
 #%% Email content
 # get current date and time
 now = datetime.datetime.now()
-sender_email = 'notifikasi@arsip.go.id'  # Replace with your email
-recipient_email = 'dollarayu@gmail.com'  # Replace with recipient's email
+sender_email = os.getenv('SENDER_EMAIL')
+recipient_email = os.getenv('RECIPIENT_EMAIL')
 subject = 'Test Email from Python at :' + now.strftime("%d/%m/%Y %H:%M:%S")
 body = 'This is a test email sent from Python script. \n\nSent time is: ' + now.strftime("%d/%m/%Y %H:%M:%S") + '\n\n' + 'Regards,\nPython'
 
